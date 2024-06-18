@@ -29,34 +29,34 @@ class MemoryManagementUnit {
     getPhysicalAddress(logicalAddress) {
         let pageNumber = Math.floor(logicalAddress / this.pageSize);
         let offset = logicalAddress % this.pageSize;
-
+    
         // Check TLB
         let tlbEntry = this.TLB.find(entry => entry.pageNumber === pageNumber);
         if (tlbEntry) {
             console.log("TLB HIT");
-            return tlbEntry.frameNumber * this.pageSize + offset;
+            return (tlbEntry.frameNumber * this.pageSize + offset).toString(16); // Chuyển sang hex
         } else {
             console.log("TLB MISS");
             let pageTableEntry = this.pageTable[pageNumber];
             if (pageTableEntry.valid) {
                 this.updateTLB(pageNumber, pageTableEntry.frameNumber);
-                return pageTableEntry.frameNumber * this.pageSize + offset;
+                return (pageTableEntry.frameNumber * this.pageSize + offset).toString(16); // Chuyển sang hex
             } else {
                 console.log("Page Fault");
                 this.loadPageIntoMemory(pageNumber);
                 pageTableEntry = this.pageTable[pageNumber];
                 this.updateTLB(pageNumber, pageTableEntry.frameNumber);
-                return pageTableEntry.frameNumber * this.pageSize + offset;
+                return (pageTableEntry.frameNumber * this.pageSize + offset).toString(16); // Chuyển sang hex
             }
         }
     }
-
+    
     getPhysicalAddress2Level(logicalAddress, pageSizeLevel1, pageSizeLevel2) {
         let p1 = Math.floor(logicalAddress / (pageSizeLevel1 * pageSizeLevel2));
         let temp = logicalAddress % (pageSizeLevel1 * pageSizeLevel2);
         let p2 = Math.floor(temp / pageSizeLevel2);
         let d = temp % pageSizeLevel2;
-
+    
         // Simulate 2-level paging (Here we assume a simple linear address space for simplicity)
         let pageNumber = p1 * pageSizeLevel1 + p2;
         let pageTableEntry = this.pageTable[pageNumber];
@@ -64,9 +64,10 @@ class MemoryManagementUnit {
             this.loadPageIntoMemory(pageNumber);
             pageTableEntry = this.pageTable[pageNumber];
         }
-
-        return pageTableEntry.frameNumber * pageSizeLevel2 + d;
+    
+        return (pageTableEntry.frameNumber * pageSizeLevel2 + d).toString(16); // Chuyển sang hex
     }
+    
 
     updateTLB(pageNumber, frameNumber) {
         if (this.TLB.length >= this.tlbSize) {
@@ -102,14 +103,15 @@ class MemoryManagementUnit {
         tableBody.innerHTML = "";
         this.pageTable.forEach(entry => {
             let row = `<tr>
-                <td>${entry.pageNumber}</td>
-                <td>${entry.frameNumber}</td>
+                <td>${entry.pageNumber.toString(16)}</td>
+                <td>${entry.frameNumber.toString(16)}</td>
                 <td>${entry.valid}</td>
                 <td>${entry.timestamp}</td>
             </tr>`;
             tableBody.insertAdjacentHTML('beforeend', row);
         });
     }
+    
 
     simulatePageReplacement(pages, algorithm) {
         let pageFaults = 0;
@@ -131,7 +133,7 @@ class MemoryManagementUnit {
     }
 }
 
-let mmu = new MemoryManagementUnit(64, 16, 1024);
+let mmu = new MemoryManagementUnit(64, 16, 4096);
 
 function translateAddress() {
     let logicalAddress = parseInt(document.getElementById("logicalAddress").value);
