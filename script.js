@@ -103,14 +103,14 @@ class MemoryManagementUnit {
         tableBody.innerHTML = "";
         this.pageTable.forEach(entry => {
             let row = `<tr>
-                <td>${entry.pageNumber.toString(16)}</td>
-                <td>${entry.frameNumber.toString(16)}</td>
+                <td>${entry.pageNumber.toString(16).toUpperCase()}</td>
+                <td>${entry.frameNumber.toString(16).toUpperCase()}</td>
                 <td>${entry.valid}</td>
                 <td>${entry.timestamp}</td>
             </tr>`;
             tableBody.insertAdjacentHTML('beforeend', row);
         });
-    }
+    }    
     
 
     simulatePageReplacement(pages, algorithm) {
@@ -136,26 +136,31 @@ class MemoryManagementUnit {
 let mmu = new MemoryManagementUnit(64, 16, 4096);
 
 function translateAddress() {
-    let logicalAddress = parseInt(document.getElementById("logicalAddress").value);
+    let input = document.getElementById("logicalAddress").value;
+    // Chuyển đổi từ hệ 16 sang số thập phân
+    let logicalAddress = parseInt(input, 16);
     if (isNaN(logicalAddress) || logicalAddress < 0) {
-        alert("Please enter a valid logical address.");
+        alert("Please enter a valid logical address in hexadecimal format.");
         return;
     }
     let physicalAddress = mmu.getPhysicalAddress(logicalAddress);
-    document.getElementById("output").innerText = "Physical Address: " + physicalAddress;
+    document.getElementById("output").innerText = "Physical Address: " + physicalAddress.toString(16).toUpperCase(); // Xuất kết quả dưới dạng hệ 16
     mmu.printPageTable();
 }
 
 function translateAddress2Level() {
-    let logicalAddress = parseInt(document.getElementById("logicalAddress").value);
+    let input = document.getElementById("logicalAddress").value;
+    // Chuyển đổi từ hệ 16 sang số thập phân
+    let logicalAddress = parseInt(input, 16);
     if (isNaN(logicalAddress) || logicalAddress < 0) {
-        alert("Please enter a valid logical address.");
+        alert("Please enter a valid logical address in hexadecimal format.");
         return;
     }
     let physicalAddress = mmu.getPhysicalAddress2Level(logicalAddress, 4, 256);
-    document.getElementById("output").innerText = "Physical Address (2-Level): " + physicalAddress;
+    document.getElementById("output").innerText = "Physical Address (2-Level): " + physicalAddress.toString(16).toUpperCase(); // Xuất kết quả dưới dạng hệ 16
     mmu.printPageTable();
 }
+
 
 function simulatePageReplacement() {
     let pages = document.getElementById("pages").value.split(',').map(Number);
