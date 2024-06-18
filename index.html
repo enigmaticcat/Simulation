@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Replacement Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Page Replacement Algorithm Simulation</h1>
+    <div>
+        <label for="logicalAddress">Enter Logical Address:</label>
+        <input type="number" id="logicalAddress">
+        <button onclick="translateAddress()">Translate</button>
+        <button onclick="translateAddress2Level()">Translate (2-Level)</button>
+    </div>
+    <div>
+        <label for="pages">Enter Pages (comma separated):</label>
+        <input type="text" id="pages">
+        <label for="algorithm">Algorithm:</label>
+        <select id="algorithm">
+            <option value="FIFO">FIFO</option>
+            <option value="LRU">LRU</option>
+        </select>
+        <button onclick="simulatePageReplacement()">Simulate</button>
+    </div>
+    <div>
+        <h2>Output</h2>
+        <p id="output"></p>
+    </div>
+    <div>
+        <h2>Page Table</h2>
+        <table id="pageTable">
+            <thead>
+                <tr>
+                    <th>Page No</th>
+                    <th>Frame No</th>
+                    <th>Valid</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
