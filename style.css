@@ -1,27 +1,122 @@
+/* Reset some basic styles */
+body, h1, h2, p, table, th, td, input, button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    background-color: #fcfcfb;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
+    margin-bottom: 20px;
+    color: #444;
     text-align: center;
 }
 
-div {
-    margin: 20px;
-    text-align: center;
+.input-section, .output-section, .page-table-section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background: #070841;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.output-section p {
+    padding: 10px;
+    background: #e9ecef;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.page-table-section {
+    overflow-x: auto;
 }
 
 table {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
     text-align: center;
+}
+
+th {
+    background: #6a89a9;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    background: #f9f9f9;
+}
+
+tr:nth-child(even) td {
+    background: #f2f2f2;
+}
+
+/* Adding media queries for better responsiveness */
+@media (max-width: 600px) {
+    .button-group {
+        flex-direction: column;
+    }
+
+    input[type="text"] {
+        width: 100%;
+    }
 }
