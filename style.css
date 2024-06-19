@@ -7,7 +7,7 @@ body, h1, h2, p, table, th, td, input, button {
 }
 
 body {
-    background-color: #fcfcfb;
+    background-color: #dae8e9;
     color: #333;
     line-height: 1.6;
     padding: 20px;
@@ -109,6 +109,33 @@ td {
 tr:nth-child(even) td {
     background: #f2f2f2;
 }
+/* Style for the select dropdown */
+select {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    appearance: none; /* Remove default arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ccc" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+select:focus {
+    border-color: #8bc34a; /* Green border on focus */
+    outline: none;
+}
+
+option {
+    padding: 10px;
+    background: #ffffff;
+    color: #333;
+}
+
 
 /* Adding media queries for better responsiveness */
 @media (max-width: 600px) {
