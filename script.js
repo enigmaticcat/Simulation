@@ -156,7 +156,7 @@ function translateAddress2Level() {
         alert("Please enter a valid logical address in hexadecimal format.");
         return;
     }
-    let physicalAddress = mmu.getPhysicalAddress2Level(logicalAddress, 4, 256);
+    let physicalAddress = mmu.getPhysicalAddress2Level(logicalAddress, 1024, 1024);
     document.getElementById("output").innerText = "Physical Address (2-Level): " + physicalAddress.toString(16).toUpperCase(); // Xuất kết quả dưới dạng hệ 16
     mmu.printPageTable();
 }
